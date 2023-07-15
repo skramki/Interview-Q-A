@@ -2,7 +2,8 @@
 
 1. How you will check driver version & Status of NIC card?
    
-   Ans: # ethtool -i <NIC_DEVICE_NAME>
+   Ans:
+   #ethtool -i <NIC_DEVICE_NAME>
         Example: # ethtool-i eth0
                  driver: e1000
                  version: 7.9.22-k8-NAPI
@@ -18,14 +19,14 @@
 3. How to identify driver version of PCI/HBA card in cli?
    
    Ans:
-  # lspci -nn | egrep -i "hba|fiber"    --> Find HBA/Fibre Channel Card installed
+   #lspci -nn | egrep -i "hba|fiber"    --> Find HBA/Fibre Channel Card installed
   04:00.0 Fibre Channel [0c04]: Emulex Corporation Saturn-X: LightPulse Fibre Channel Host Adapter [10df:f100] (rev 03)
   04:00.1 Fibre Channel [0c04]: Emulex Corporation Saturn-X: LightPulse Fibre Channel Host Adapter [10df:f100] (rev 03)
   05:00.0 Fibre Channel [0c04]: Emulex Corporation Saturn-X: LightPulse Fibre Channel Host Adapter [10df:f100] (rev 03)
   05:00.1 Fibre Channel [0c04]: Emulex Corporation Saturn-X: LightPulse Fibre Channel Host Adapter [10df:f100] (rev 03)
   82:00.0 Fibre Channel [0c04]: Emulex Corporation Saturn-X: LightPulse Fibre Channel Host Adapter [10df:f100] (rev 03)
   82:00.1 Fibre Channel [0c04]: Emulex Corporation Saturn-X: LightPulse Fibre Channel Host Adapter [10df:f100] (rev 03)
-  # lspci -v -s 04:00.0                 --> Find the Physical Port, Driver details
+  #lspci -v -s 04:00.0                 --> Find the Physical Port, Driver details
   04:00.0 Fibre Channel: Emulex Corporation Saturn-X: LightPulse Fibre Channel Host Adapter (rev 03)
   Subsystem: Emulex Corporation Saturn-X: LightPulse Fibre Channel Host Adapter
   Flags: bus master, fast devsel, latency 0, IRQ 84, NUMA node 0
@@ -41,9 +42,9 @@
   Capabilities: [12c] Power Budgeting <?>
   Kernel driver in use: lpfc
   Kernel modules: lpfc
-  # modinfo -d lpfc                   --> SCISI Driver info
+  #modinfo -d lpfc                   --> SCISI Driver info
   Emulex LightPulse Fibre Channel SCSI driver 11.2.0.6
-  # modinfo lpfc|grep version        --> Driver version & Module
+  #modinfo lpfc|grep version        --> Driver version & Module
   version: 0:11.2.0.6
   rhelversion: 8.2
   srcversion: 72B09363B7415BF170E8W43
@@ -53,16 +54,16 @@
 4. Datacenter team has provision layed network cabling to server, How you will validate on OS level using CLI?
    
    Ans:
-   # lshw -class network -short    --> List network adaptor
+   #lshw -class network -short    --> List network adaptor
 
-  H/W path       Device      Class          Description
-  =====================================================
+**  H/W path       Device      Class          Description
+  =====================================================**
   /0/100/1c/0    wlp1s0      network        Wireless 8265 / 8275
   /0/100/1f.6    eno1        network        Ethernet Connection I219-LM
   /2             virbr0-nic  network        Ethernet interface
   /3             virbr0      network        Ethernet interface
 
-  # ethtool eno1
+  #ethtool eno1
   Settings for eno1:
 	Supported ports: [ TP ]
 	Supported link modes:   10baseT/Half 10baseT/Full 
@@ -91,7 +92,7 @@
 	**Link detected: yes**        --> Make sure "Link detected: yes" else engadge DC/Netowrk team to Lay the cabling
 
  or 
- # nmcli device status
+ #nmcli device status
 
    
 5. Server has config Raid 1+0 and hardware disk failure notfication has receive, How will you validate in Linux CLI?
@@ -99,13 +100,15 @@
    Device: /dev/sdb [SAT], unable to open device
    
      Ans:
-     # dmsg | grep sdb
-     # smartctl --all /dev/sdb
+     #dmsg | grep sdb
+   
+     #smartctl --all /dev/sdb
       smartctl 6.2 2013-07-26 r3841 [x86_64-linux-3.10.0-514.2.2.el7.x86_64] (local build)
       Copyright (C) 2002-13, Bruce Allen, Christian Franke, www.smartmontools.org
 
       Smartctl open device: /dev/sdb failed: No such device        --> Confirm disk sdb failed
-     # fdisk -l 2>/dev/null | egrep -i '^disk /dev+.' | sort
+   
+     #fdisk -l 2>/dev/null | egrep -i '^disk /dev+.' | sort
      Disk /dev/sda: 3000.6 GB, 3000592982016 bytes, 5860533168 sectors
      Disk /dev/sdc: 3000.6 GB, 3000592982016 bytes, 5860533168 sectors
      Disk /dev/sdd: 3000.6 GB, 3000592982016 bytes, 5860533168 sectors
@@ -120,7 +123,7 @@
 9. What are the log files you will validate in RHEL8 on routine basis?
     
    Ans:
-   # journelctl --> Talking on RHEL8 prefer to use journelctl with required options based on use cases
+   #journelctl --> Talking on RHEL8 prefer to use journelctl with required options based on use cases
 
    The following subdirectories under the /var/log directory store syslog messages.
 
@@ -135,7 +138,7 @@
 11. How you will identify status of WWN ID on RHEL8?
     
    Ans:
-   # systool -c fc_host -v
+   #systool -c fc_host -v
        (output trimmed for clarity)
     
       Class Device path = "/sys/class/fc_host/host8"  (kernel assigned host name/number)
@@ -154,8 +157,8 @@
 11. What’s the CLI use to validate HBA card port status?
     
    Ans:
-   # lspci
-   # systool -c fc_host -v    from sysfsutils package
+   #lspci
+   #systool -c fc_host -v    from sysfsutils package
   Class = "fc_host"
 
   Class Device = "host10"
@@ -195,10 +198,10 @@ Refer: https://access.redhat.com/solutions/528683
 10. There is request to change NIC duplex/speed value to half, What could be your steps you follow?
     
     Ans:
-    # ethtool eth0
-    # ethtool -s eth0 speed 100 duplex half autoneg off
+    #ethtool eth0
+    #ethtool -s eth0 speed 100 duplex half autoneg off
     To make a speed change permanent for eth0, set or add the ETHTOOL_OPT environment variable in /etc/sysconfig/network-scripts/ifcfg-eth0:
-    # ETHTOOL_OPTS="speed 1000 duplex full autoneg off"
+    ETHTOOL_OPTS="speed 1000 duplex full autoneg off"
 
 Refer: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/5/html/tuning_and_optimizing_red_hat_enterprise_linux_for_oracle_9i_and_10g_databases/chap-oracle_9i_and_10g_tuning_guide-adjusting_network_settings#sect-Oracle_9i_and_10g_Tuning_Guide-Adjusting_Network_Settings-Changing_Network_Adapter_Settings
     
@@ -226,16 +229,16 @@ Refer: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/5/
 	Ans: 
 	To identify network traffic use tcpdump utility like below
 
-	# tcpdump -i bond0 -c 20 host/src <HOST_IP_bond0> and port 80 -p udp -w /tmp/tcpdump_outputfile.log -v
-	#Syntax#  tcpdump -i <Interface_name> -c <NO_of_Packet_count> src <HOST_IP>.<PORT> and des <DEST_IP>.<PORT> -w <OUTPUT_FILE>
+#tcpdump -i bond0 -c 20 host/src <HOST_IP_bond0> and port 80 -p udp -w /tmp/tcpdump_outputfile.log -v
+#Syntax#  tcpdump -i <Interface_name> -c <NO_of_Packet_count> src <HOST_IP>.<PORT> and des <DEST_IP>.<PORT> -w <OUTPUT_FILE>
 
-	# To Read tcpdump output file
-	# tcpdump -r <OUTPUT_FILE>
+#To Read tcpdump output file
+#tcpdump -r <OUTPUT_FILE>
 
 2. How you will make sure crash dump has enable, if not what’s your steps?
 
-	# CLI to generate a memory usage report
-	# makedumpfile --mem-usage /proc/kcore
+#CLI to generate a memory usage report
+	#makedumpfile --mem-usage /proc/kcore
 	# grubby --update-kernel=ALL --args="crashkernel=512M-2G:64M,2G-:128M@16M”
 	# grep -v ^# /etc/kdump.conf | grep -v ^$
 		ext4 /dev/mapper/vg00-varcrashvol
