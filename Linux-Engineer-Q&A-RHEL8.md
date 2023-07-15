@@ -212,7 +212,7 @@ Refer: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/5/
 
     We had many reference documents and here is default module https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_module_defaults.html
     
-14. Which programming languages you are comfortable with?
+13. Which programming languages you are comfortable with?
     
     Ans:
     Tell top 3 comfortable language you are familier with, here it depends on individual have to answer.
