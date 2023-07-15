@@ -220,7 +220,7 @@ Refer: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/5/
 **1st Round Scenarios:**
 1. App user can’t access SSH terminal. How do you take this call?
 2. Users has raised complain on intermittent performance issue and it has escalated to give Top priority. What are the action items you will take & your approach?
-3. Incident has reported portal is accessible, also Web layer team confirms services are running fine. Now they reach you to fix the issue. At this time what are the tools look into and your approach to resolve?
+3. Incident has reported portal is inaccessible, also Web layer team confirms services are running fine. Now they reach you to fix the issue. At this time what are the tools look into and your approach to resolve?
 4. Peer team user don’t have access to some of config files, they request you to create pipeline using Jenkins. Now explain how would you achieve this?
 
 **2nd Round Scenarios:**
