@@ -1,6 +1,7 @@
 **Basic Linux Engineer Interview Questions focused on RHEL8**
 
 1. How you will check driver version & Status of NIC card?
+   
    Ans: # ethtool -i <NIC_DEVICE_NAME>
         Example: # ethtool-i eth0
                  driver: e1000
@@ -15,6 +16,7 @@
         # lshw
    
 3. How to identify driver version of PCI/HBA card in cli?
+   
    Ans:
   # lspci -nn | egrep -i "hba|fiber"    --> Find HBA/Fibre Channel Card installed
   04:00.0 Fibre Channel [0c04]: Emulex Corporation Saturn-X: LightPulse Fibre Channel Host Adapter [10df:f100] (rev 03)
@@ -49,6 +51,7 @@
 
    
 4. Datacenter team has provision layed network cabling to server, How you will validate on OS level using CLI?
+   
    Ans:
    # lshw -class network -short    --> List network adaptor
 
@@ -94,6 +97,7 @@
 5. Server has config Raid 1+0 and hardware disk failure notfication has receive, How will you validate in Linux CLI?
    WARNING: Your hard drive is failing
    Device: /dev/sdb [SAT], unable to open device
+   
      Ans:
      # dmsg | grep sdb
      # smartctl --all /dev/sdb
@@ -108,11 +112,13 @@
 
    In this case engadge hardware vendor to replace **sdb** disk with right hardware part number online
 
-6. What is initramfs and explain its functionalities?
+7. What is initramfs and explain its functionalities?
+   
    Ans:
    Initramfs is a root filesystem that is embedded into the kernel and loaded at an early stage of the boot process. It is the successor of initrd.     It provides early userspace which can do things the kernel can't easily do by itself during the boot process. Using initramfs is optional.
 
-7. What are the log files you will validate in RHEL8 on routine basis?
+9. What are the log files you will validate in RHEL8 on routine basis?
+    
    Ans:
    # journelctl --> Talking on RHEL8 prefer to use journelctl with required options based on use cases
 
@@ -126,7 +132,8 @@
 
    Reference: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_basic_system_settings/assembly_troubleshooting-problems-using-log-files_configuring-basic-system-settings
    
-8. How you will identify status of WWN ID on RHEL8?
+11. How you will identify status of WWN ID on RHEL8?
+    
    Ans:
    # systool -c fc_host -v
        (output trimmed for clarity)
@@ -144,7 +151,8 @@
    
    Reference: https://access.redhat.com/articles/17054#NR2
    
-9. What’s the CLI use to validate HBA card port status?
+11. What’s the CLI use to validate HBA card port status?
+    
    Ans:
    # lspci
    # systool -c fc_host -v    from sysfsutils package
@@ -185,6 +193,7 @@ Refer: https://access.redhat.com/solutions/528683
 
 
 10. There is request to change NIC duplex/speed value to half, What could be your steps you follow?
+    
     Ans:
     # ethtool eth0
     # ethtool -s eth0 speed 100 duplex half autoneg off
@@ -194,12 +203,14 @@ Refer: https://access.redhat.com/solutions/528683
 Refer: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/5/html/tuning_and_optimizing_red_hat_enterprise_linux_for_oracle_9i_and_10g_databases/chap-oracle_9i_and_10g_tuning_guide-adjusting_network_settings#sect-Oracle_9i_and_10g_Tuning_Guide-Adjusting_Network_Settings-Changing_Network_Adapter_Settings
     
 12. What are the ansible modules you have been worked and explain your experience?
+    
     Ans:
     Explain interviewer use case which you are more familier, which will ensure your confidence level on Ansible automation.
 
     We had many reference documents and here is default module https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_module_defaults.html
     
 14. Which programming languages you are comfortable with?
+    
     Ans:
     Tell top 3 comfortable language you are familier with, here it depends on individual have to answer.
 
