@@ -1,32 +1,32 @@
 **Basic Linux Engineer Interview Questions focused on RHEL8**
 
+**1st Round** 
+
 1. How you will check driver version & Status of NIC card?
-   
    Ans:
-   #ethtool -i <NIC_DEVICE_NAME>
+   > ethtool -i <NIC_DEVICE_NAME>
         Example: # ethtool-i eth0
                  driver: e1000
                  version: 7.9.22-k8-NAPI
                  firmware-version: 
                  bus-info: 0000:02:01.0
                  supports-statistics: yes
-        # nmcli device status
+        > nmcli device status
+         (or)
+        > ethtool eth0 | egrep -i "Link detected"
          or
-        # ethtool eth0 | egrep -i "Link detected"
-         or
-        # lshw
+        > lshw
    
 2. How to identify driver version of PCI/HBA card in cli?
-   
    Ans:
-   #lspci -nn | egrep -i "hba|fiber"    --> Find HBA/Fibre Channel Card installed
+   > lspci -nn | egrep -i "hba|fiber"    --> Find HBA/Fibre Channel Card installed
   04:00.0 Fibre Channel [0c04]: Emulex Corporation Saturn-X: LightPulse Fibre Channel Host Adapter [10df:f100] (rev 03)
   04:00.1 Fibre Channel [0c04]: Emulex Corporation Saturn-X: LightPulse Fibre Channel Host Adapter [10df:f100] (rev 03)
   05:00.0 Fibre Channel [0c04]: Emulex Corporation Saturn-X: LightPulse Fibre Channel Host Adapter [10df:f100] (rev 03)
   05:00.1 Fibre Channel [0c04]: Emulex Corporation Saturn-X: LightPulse Fibre Channel Host Adapter [10df:f100] (rev 03)
   82:00.0 Fibre Channel [0c04]: Emulex Corporation Saturn-X: LightPulse Fibre Channel Host Adapter [10df:f100] (rev 03)
   82:00.1 Fibre Channel [0c04]: Emulex Corporation Saturn-X: LightPulse Fibre Channel Host Adapter [10df:f100] (rev 03)
-  #lspci -v -s 04:00.0                 --> Find the Physical Port, Driver details
+  > lspci -v -s 04:00.0                 --> Find the Physical Port, Driver details
   04:00.0 Fibre Channel: Emulex Corporation Saturn-X: LightPulse Fibre Channel Host Adapter (rev 03)
   Subsystem: Emulex Corporation Saturn-X: LightPulse Fibre Channel Host Adapter
   Flags: bus master, fast devsel, latency 0, IRQ 84, NUMA node 0
@@ -42,9 +42,11 @@
   Capabilities: [12c] Power Budgeting <?>
   Kernel driver in use: lpfc
   Kernel modules: lpfc
-  #modinfo -d lpfc                   --> SCISI Driver info
+  
+  > modinfo -d lpfc                   --> SCISI Driver info
   Emulex LightPulse Fibre Channel SCSI driver 11.2.0.6
-  #modinfo lpfc|grep version        --> Driver version & Module
+
+  > modinfo lpfc|grep version        --> Driver version & Module
   version: 0:11.2.0.6
   rhelversion: 8.2
   srcversion: 72B09363B7415BF170E8W43
@@ -52,18 +54,17 @@
 
    
 3. Datacenter team has provision layed network cabling to server, How you will validate on OS level using CLI?
-   
    Ans:
-   #lshw -class network -short    --> List network adaptor
+   > lshw -class network -short    --> List network adaptor
 
-**  H/W path       Device      Class          Description
-  =====================================================**
-  /0/100/1c/0    wlp1s0      network        Wireless 8265 / 8275
-  /0/100/1f.6    eno1        network        Ethernet Connection I219-LM
-  /2             virbr0-nic  network        Ethernet interface
-  /3             virbr0      network        Ethernet interface
+	H/W path       Device      Class          Description
+  	=====================================================
+  	/0/100/1c/0    wlp1s0      network        Wireless 8265 / 8275
+  	/0/100/1f.6    eno1        network        Ethernet Connection I219-LM
+  	/2             virbr0-nic  network        Ethernet interface
+  	/3             virbr0      network        Ethernet interface
 
-  #ethtool eno1
+  > ethtool eno1
   Settings for eno1:
 	Supported ports: [ TP ]
 	Supported link modes:   10baseT/Half 10baseT/Full 
@@ -91,39 +92,38 @@
 			       drv probe link
 	**Link detected: yes**        --> Make sure "Link detected: yes" else engadge DC/Netowrk team to Lay the cabling
 
- or 
- #nmcli device status
+ (or) 
+ 
+ > nmcli device status
 
    
 4. Server has config Raid 1+0 and hardware disk failure notfication has receive, How will you validate in Linux CLI?
    WARNING: Your hard drive is failing
    Device: /dev/sdb [SAT], unable to open device
+   Ans:
+     > dmsg | grep sdb
    
-     Ans:
-     #dmsg | grep sdb
-   
-     #smartctl --all /dev/sdb
+     > smartctl --all /dev/sdb
       smartctl 6.2 2013-07-26 r3841 [x86_64-linux-3.10.0-514.2.2.el7.x86_64] (local build)
       Copyright (C) 2002-13, Bruce Allen, Christian Franke, www.smartmontools.org
 
       Smartctl open device: /dev/sdb failed: No such device        --> Confirm disk sdb failed
    
-     #fdisk -l 2>/dev/null | egrep -i '^disk /dev+.' | sort
+     > fdisk -l 2>/dev/null | egrep -i '^disk /dev+.' | sort
      Disk /dev/sda: 3000.6 GB, 3000592982016 bytes, 5860533168 sectors
      Disk /dev/sdc: 3000.6 GB, 3000592982016 bytes, 5860533168 sectors
      Disk /dev/sdd: 3000.6 GB, 3000592982016 bytes, 5860533168 sectors
 
    In this case engadge hardware vendor to replace **sdb** disk with right hardware part number online
 
-5. What is initramfs and explain its functionalities?
-   
+6. What is initramfs and explain its functionalities?
    Ans:
-   Initramfs is a root filesystem that is embedded into the kernel and loaded at an early stage of the boot process. It is the successor of initrd.     It provides early userspace which can do things the kernel can't easily do by itself during the boot process. Using initramfs is optional.
+   Initramfs is a root filesystem that is embedded into the kernel and loaded at an early stage of the boot process. It is the successor of initrd.
+   It provides early userspace which can do things the kernel can't easily do by itself during the boot process. Using initramfs is optional.
 
-6. What are the log files you will validate in RHEL8 on routine basis?
-    
+8. What are the log files you will validate in RHEL8 on routine basis?
    Ans:
-   #journelctl --> Talking on RHEL8 prefer to use journelctl with required options based on use cases
+   > journelctl --> Talking on RHEL8 prefer to use journelctl with required options based on use cases
 
    The following subdirectories under the /var/log directory store syslog messages.
 
@@ -135,10 +135,9 @@
 
    Reference: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_basic_system_settings/assembly_troubleshooting-problems-using-log-files_configuring-basic-system-settings
    
-7. How you will identify status of WWN ID on RHEL8?
-    
+9. How you will identify status of WWN ID on RHEL8?
    Ans:
-   #systool -c fc_host -v
+   > systool -c fc_host -v
        (output trimmed for clarity)
     
       Class Device path = "/sys/class/fc_host/host8"  (kernel assigned host name/number)
@@ -154,38 +153,36 @@
    
    Reference: https://access.redhat.com/articles/17054#NR2
    
-8. What’s the CLI use to validate HBA card port status?
-    
+10. What’s the CLI use to validate HBA card port status?
    Ans:
-   #lspci
-   #systool -c fc_host -v    from sysfsutils package
-  Class = "fc_host"
+    > lspci
+    > systool -c fc_host -v from sysfsutils package
+      Class = "fc_host"
+	Class Device = "host10"
+  	Class Device path = "/sys/class/fc_host/host10"
+    	  fabric_name         = "0x200000e08b8068ae"
+	  issue_lip           = 
+    	  node_name           = "0x200000e08b8068ae"
+	  port_id             = "0x000000"
+    	  port_name           = "0x210000e08b8068ae"
+    	  port_state          = "Linkdown"
+    	  port_type           = "Unknown"
+    	  speed               = "unknown"
+    	  supported_classes   = "Class 3"
+    	  supported_speeds    = "1 Gbit, 2 Gbit, 4 Gbit"
+    	  symbolic_name       = "QLE2460 FW:v5.06.03 DVR:v8.03.07.15.05.09-k"
+    	  system_hostname     = ""
+    	  tgtid_bind_type     = "wwpn (World Wide Port Name)"
+    	  uevent              = 
 
-  Class Device = "host10"
-  Class Device path = "/sys/class/fc_host/host10"
-    fabric_name         = "0x200000e08b8068ae"
-    issue_lip           = 
-    node_name           = "0x200000e08b8068ae"
-    port_id             = "0x000000"
-    port_name           = "0x210000e08b8068ae"
-    port_state          = "Linkdown"
-    port_type           = "Unknown"
-    speed               = "unknown"
-    supported_classes   = "Class 3"
-    supported_speeds    = "1 Gbit, 2 Gbit, 4 Gbit"
-    symbolic_name       = "QLE2460 FW:v5.06.03 DVR:v8.03.07.15.05.09-k"
-    system_hostname     = ""
-    tgtid_bind_type     = "wwpn (World Wide Port Name)"
-    uevent              = 
-
-    Device = "host10"
-    Device path = "/sys/devices/pci0000:00/0000:00:04.0/0000:08:00.0/host10"
-      optrom_ctl          = 
-      reset               = 
-      uevent              = 
+    	Device = "host10"
+    	Device path = "/sys/devices/pci0000:00/0000:00:04.0/0000:08:00.0/host10"
+      	  optrom_ctl          = 
+      	  reset               =
+    	  uevent              = 
 
       (or)
-    # grep -v "zZzZ" -H /sys/class/fc_host/host*/port_state
+    > grep -v "zZzZ" -H /sys/class/fc_host/host*/port_state
     sys/class/fc_host/host10/port_state:Linkdown    --> **host10 has identified Linkdown**
     sys/class/fc_host/host11/port_state:Online
     sys/class/fc_host/host12/port_state:Online
@@ -196,24 +193,21 @@ Refer: https://access.redhat.com/solutions/528683
 
 
 9. There is request to change NIC duplex/speed value to half, What could be your steps you follow?
-    
-    Ans:
-    #ethtool eth0
-    #ethtool -s eth0 speed 100 duplex half autoneg off
+   Ans:
+   > ethtool eth0
+   > ethtool -s eth0 speed 100 duplex half autoneg off
     To make a speed change permanent for eth0, set or add the ETHTOOL_OPT environment variable in /etc/sysconfig/network-scripts/ifcfg-eth0:
     ETHTOOL_OPTS="speed 1000 duplex full autoneg off"
 
 Refer: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/5/html/tuning_and_optimizing_red_hat_enterprise_linux_for_oracle_9i_and_10g_databases/chap-oracle_9i_and_10g_tuning_guide-adjusting_network_settings#sect-Oracle_9i_and_10g_Tuning_Guide-Adjusting_Network_Settings-Changing_Network_Adapter_Settings
     
 10. What are the ansible modules you have been worked and explain your experience?
-    
     Ans:
     Explain interviewer use case which you are more familier, which will ensure your confidence level on Ansible automation.
 
     We had many reference documents and here is default module https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_module_defaults.html
     
 11. Which programming languages you are comfortable with?
-    
     Ans:
     Tell top 3 comfortable language you are familier with, here it depends on individual have to answer.
 
@@ -222,110 +216,3 @@ Refer: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/5/
 2. Users has raised complain on intermittent performance issue and it has escalated to give Top priority. What are the action items you will take & your approach?
 3. Incident has reported portal is inaccessible, also Web layer team confirms services are running fine. Now they reach you to fix the issue. At this time what are the tools look into and your approach to resolve?
 4. Peer team user don’t have access to some of config files, they request you to create pipeline using Jenkins. Now explain how would you achieve this?
-
-**2nd Round Scenarios:**
-
-Troubleshooting Steps
-
-1. How you will boot kernel panic system in RHEL8? Linux rescue mode in RHEL8?
-   Ans:
-	Image not found:
-	> After reboot /initramfs-3.10-el8.img not found
-	> Boot in Linux Rescue mode with limited option with root password
-	> uname -r
-	> dracut initramfs-3.10.0-1062.el8.x86_64.img 3.10.0-1062.el8.x86_64
-	> dracut —force initramfs-3.10.0-1062.el8.x86_64.img 3.10.0-1062.el8.x86_64
-
-2. How you boot with Single user mode in RHEL8?
-   Ans:
-	> Kernel Press e to edit —> linux ($root)/vmlinuz- rw init=/sysroot/bin/bash —> Crtl X
-	> Kernel Press e to edit —> linux ($root)/vmlinuz- rd.break init=/bin/sh —> Crtl X
-	> #Now we are in Emergency mode
-	> chroot /sysroot
-	> mount —bind /prod /sysroot/proc/
-	> mount —bind /sys /sysroot/sys
-	> mount —bind /dev /sysroot/dev
-	> chroot /sysroot
-	sh-4.2 # mount -o remount,rw /
-	sh-4.2 # lvs
-	sh-4.2 # vgchange -ay
-	sh-4.2# mount -a
-	sh-4.2# passwd root
-	sh-4.2# touch ./autorelabel
-
-3. How to extend lv in RHEL8?
-   Ans:
-	> lvextend -r -L +1G /dev/vgname/lvname		--> ( -r Resize underlying filesystem together with the logical volume using ) 
-	( or )
-	> lvextend -L +1G /dev/vgname/lvname
- 	> xfs_growfs /dev/vgname/lvname			--> ( Traditional method )
-
-4. Explain Selinux policy for RHEL8?
-   Ans:
-	> get enforce
-	> set enforce 0
-	  Premissive
- 	> set enforce 1
-	  Enforcing
- 
-	> getsebool -a | grep “http”
-	> setsebool -P httpd_enable_ftp_server on
-	> getsebook -a | grep http_enable
-	> semanage port -a -t http_port_t -p tcp 82
-	> ls -lZ /var/www/html
-	> semanage fcontext -a -t httpd_sys_content_t /var/www/html/index.html “/var/www/html/(*)?”
-	> restore con -Rv /var/www/html
-	> ls -lZ /var/www/html
- 
-5. Explain detail about /etc/fstab entry and how will you make sure Filesystem order is correct?
-   Ans:
-	Your Linux system's filesystem table, /etc/fstab, is a configuration table designed to ease the burden of mounting and unmounting file systems to a machine by hard coded configuration.
-
-   	**Device**		**Mount Point**		**FS Type**	**Options of MountPoint**	**Backup Operation**	**Filesystem Check Order**
-	/dev/mapper/rhel-root   /                       xfs     	defaults        		0 			0
-	UUID=64351209-b3d4-421d-8900-7d940ca56fea /boot xfs     	defaults        		0 			0
-	/dev/mapper/rhel-swap   swap                    swap    	defaults        		0 			0
-
-6. Linux CIS hardening standards for module change?
-   Ans:
-   Refer --> https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/security_guide/sec-hardening_tls_configuration#sec-Working_with_Cipher_Suites_in_OpenSSL
-
-7. Have you used default Redhat tools to upgrade OS from RHEL7 to RHEL8?
-   Ans:
-   Yes, Using Leapp utility I've upgraded RHEL7 to RHEL8 with pre-requesties given below.
-   
-   Reference https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html-single/upgrading_from_rhel_7_to_rhel_8/index
-   
-8. Explain rhel8 patching procedure using Ansible playbook?
-   Ans:
-   Yes, Using below reference can explain patching procedure using ansible playbook.
-   
-   Reference https://stackoverflow.com/questions/44019836/install-multiple-yum-packages-on-centosnode-via-ansible
-
-**2nd Round Scenarios:**
-
-1. User has reported intermittent network issue on application level, they are reaching you to analyse network traffic at this time. What step will you take place & what CLI used to conclude?
-	Ans: 
-	To identify network traffic use tcpdump utility like below
-
-#tcpdump -i bond0 -c 20 host/src <HOST_IP_bond0> and port 80 -p udp -w /tmp/tcpdump_outputfile.log -v
-#Syntax#  tcpdump -i <Interface_name> -c <NO_of_Packet_count> src <HOST_IP>.<PORT> and des <DEST_IP>.<PORT> -w <OUTPUT_FILE>
-
-#To Read tcpdump output file
-#tcpdump -r <OUTPUT_FILE>
-
-2. How you will make sure crash dump has enable, if not what’s your steps?
-
-#CLI to generate a memory usage report
-	#makedumpfile --mem-usage /proc/kcore
-	# grubby --update-kernel=ALL --args="crashkernel=512M-2G:64M,2G-:128M@16M”
-	# grep -v ^# /etc/kdump.conf | grep -v ^$
-		ext4 /dev/mapper/vg00-varcrashvol
-		path /var/crash
-		core_collector makedumpfile -c --message-level 1 -d 31
-	# core_collector makedumpfile -l --message-level 1 -d 31           —> Manual Configuration CLI
-	# systemctl is-active kdump
-		active
-	
-	Force Linux Kernel to Crash 
-	# echo 1 > /proc/sys/kernel/sysrq
