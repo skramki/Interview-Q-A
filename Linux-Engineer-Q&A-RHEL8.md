@@ -3,7 +3,7 @@
 **1st Round** 
 
 1. How you will check driver version & Status of NIC card?
-   Ans:
+   > Ans:
    > ethtool -i <NIC_DEVICE_NAME>
         Example: # ethtool-i eth0
                  driver: e1000
@@ -18,7 +18,7 @@
         > lshw
    
 2. How to identify driver version of PCI/HBA card in cli?
-   Ans:
+   > Ans:
    > lspci -nn | egrep -i "hba|fiber"    --> Find HBA/Fibre Channel Card installed
   04:00.0 Fibre Channel [0c04]: Emulex Corporation Saturn-X: LightPulse Fibre Channel Host Adapter [10df:f100] (rev 03)
   04:00.1 Fibre Channel [0c04]: Emulex Corporation Saturn-X: LightPulse Fibre Channel Host Adapter [10df:f100] (rev 03)
@@ -26,6 +26,7 @@
   05:00.1 Fibre Channel [0c04]: Emulex Corporation Saturn-X: LightPulse Fibre Channel Host Adapter [10df:f100] (rev 03)
   82:00.0 Fibre Channel [0c04]: Emulex Corporation Saturn-X: LightPulse Fibre Channel Host Adapter [10df:f100] (rev 03)
   82:00.1 Fibre Channel [0c04]: Emulex Corporation Saturn-X: LightPulse Fibre Channel Host Adapter [10df:f100] (rev 03)
+
   > lspci -v -s 04:00.0                 --> Find the Physical Port, Driver details
   04:00.0 Fibre Channel: Emulex Corporation Saturn-X: LightPulse Fibre Channel Host Adapter (rev 03)
   Subsystem: Emulex Corporation Saturn-X: LightPulse Fibre Channel Host Adapter
