@@ -82,7 +82,7 @@ Troubleshooting Steps
 **2nd Round Scenarios:**
 
 1. User has reported intermittent network issue on application level, they are reaching you to analyse network traffic at this time. What step will you take place & what CLI used to conclude?
-	Ans: 
+  Ans: 
   This answer will explain deep troubleshoot skills by answering, collect more inputs from Application stack holders like source & destination IP/Port which they are trying to hit.
   Next perform basic troubleshoot on traceroute of destination IP from source server IP to make sure connection establish and server is healthy.
   Since no issue noticed on Server Layer, reach Network team to make sure no packet drop from source to destination IP.
