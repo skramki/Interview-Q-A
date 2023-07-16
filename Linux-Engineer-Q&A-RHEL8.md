@@ -59,7 +59,7 @@
    > lshw -class network -short    --> List network adaptor
 
 	H/W path       Device      Class          Description
-  	=====================================================
+	
   	/0/100/1c/0    wlp1s0      network        Wireless 8265 / 8275
   	/0/100/1f.6    eno1        network        Ethernet Connection I219-LM
   	/2             virbr0-nic  network        Ethernet interface
