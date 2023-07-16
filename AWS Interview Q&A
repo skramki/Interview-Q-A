@@ -1,0 +1,36 @@
+Let's talk about AWS Interview Questions and expected answers:
+
+1) what's the key components of AWS?
+  Ans:
+  > Route 53: A DNS web service
+  > Simple E-mail Service
+  > Identity and Access Management
+  > Simple Storage Device or (S3)
+  > Elastic Compute Cloud (EC2): It provides on-demand computing resources for hosting applications based on workload
+  > Elastic Block Store (EBS): It offers persistent storage volumes that attach to EC2 to allow you to persist data past the lifespan of a single Amazon EC2 instance
+  > CloudWatch: To monitor AWS resources
+
+2) what the difference between an EC2 instance and AMI?
+  Ans:
+  EC2 Instance: AWS EC2 most well-known services, offers businesses the ability to run applications on the public cloud. 
+  An EC2 instance is simply a virtual server in Amazon Web Services terminology which provision Compute, OS, Network, Storage pay-as-you-go.
+  
+  Amazon Machine Image: is a template that provides the information (an operating system, an application server, and applications) required to launch an instance.
+  which is a copy of the AMI running as a virtual server in the cloud.
+
+3) Explain types of Storage services in AWS and what's the default type while create EC2 instance?
+  Ans:
+  By default S3 (Simplae Storage Device) used while creating EC2 instances.
+  AWS offers 7 types of Storage services, lets talk each of them
+
+    3.1) S3 (Simple Storage Service): S3, has an object storage paradigm that can store and retrieve data of any size.
+    3.2) EBS (Elastic Block Storage): EBS provides block storage which is similar to hard drives to store any kind of data persistently. They provide absolute low-latency performance and you can also scale up or down your resources as and when required. EBS is available in both SSD and HDD formats depending on your requirement of speed and volume.
+    3.3) EFS (Elastic File System): EFS is a managed network file system that is easy to set up. When you have multiple EC2 instances needed to access the same file system EFS helps in providing using NFS4.x protocol on SSD.
+    3.4) Luster FSx ( Amazon FSx for Lustre): Luster is a file system used for compute-intensive workloads. This mainly focused large file size like videos, photos data running in VPC provider at lower cost.
+    3.5) Galcier (Amazon S3 Glacier): Galcier is used mainly for archival and long-term data storage for backup at an extremely cheaper cost.
+    3.6) Amazon FSx for Windows File Server: Native Windows specific software that needs to access the proprietary windows file system on the cloud
+    3.7) AWS Storage Gateway: Storage Gateway is a simple way to let your on-premise applications store, access or archive the data into the AWS cloud. It provides a highly optimized, network resilient and low-cost way to move your data from on-prem to the cloud.
+
+
+
+
