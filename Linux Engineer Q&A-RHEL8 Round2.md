@@ -6,8 +6,8 @@
 Troubleshooting Steps
 
 1. How you will boot kernel panic system in RHEL8? Linux rescue mode in RHEL8?
-   Ans:
-	Image not found:
+   > Ans:
+	> Identified from console Image not found
 	> After reboot /initramfs-3.10-el8.img not found
 	> Boot in Linux Rescue mode with limited option with root password
 	> uname -r
@@ -15,7 +15,7 @@ Troubleshooting Steps
 	> dracut —force initramfs-3.10.0-1062.el8.x86_64.img 3.10.0-1062.el8.x86_64
 
 2. How you boot with Single user mode in RHEL8?
-   Ans:
+   > Ans:
 	> Kernel Press e to edit —> linux ($root)/vmlinuz- rw init=/sysroot/bin/bash —> Crtl X
 	> Kernel Press e to edit —> linux ($root)/vmlinuz- rd.break init=/bin/sh —> Crtl X
 	> #Now we are in Emergency mode
@@ -33,8 +33,9 @@ Troubleshooting Steps
 
 3. How to extend lv in RHEL8?
    Ans:
-	> lvextend -r -L +1G /dev/vgname/lvname		--> ( -r Resize underlying filesystem together with the logical volume using ) 
-	( or )
+	> lvextend -r -L +1G /dev/vgname/lvname		--> ( -r Resize underlying filesystem together with the logical volume using )
+ 	> 	
+	> ( or )
 	> lvextend -L +1G /dev/vgname/lvname
  	> xfs_growfs /dev/vgname/lvname			--> ( Traditional method )
 
@@ -57,24 +58,24 @@ Troubleshooting Steps
  
 5. Explain detail about /etc/fstab entry and how will you make sure Filesystem order is correct?
    Ans:
-	Your Linux system's filesystem table, /etc/fstab, is a configuration table designed to ease the burden of mounting and unmounting file systems to a machine by hard coded configuration.
+   	Your Linux system's filesystem table, /etc/fstab, is a configuration table designed to ease the burden of mounting and unmounting file systems to a 		machine by hard coded configuration.
 
    	**Device**		**Mount Point**		**FS Type**	**Options of MountPoint**	**Backup Operation**	**Filesystem Check Order**
 	/dev/mapper/rhel-root   /                       xfs     	defaults        		0 			0
 	UUID=64351209-b3d4-421d-8900-7d940ca56fea /boot xfs     	defaults        		0 			0
 	/dev/mapper/rhel-swap   swap                    swap    	defaults        		0 			0
 
-6. Linux CIS hardening standards for module change?
+7. Linux CIS hardening standards for module change?
    Ans:
    Refer --> https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/security_guide/sec-hardening_tls_configuration#sec-Working_with_Cipher_Suites_in_OpenSSL
 
-7. Have you used default Redhat tools to upgrade OS from RHEL7 to RHEL8?
+8. Have you used default Redhat tools to upgrade OS from RHEL7 to RHEL8?
    Ans:
    Yes, Using Leapp utility I've upgraded RHEL7 to RHEL8 with pre-requesties given below.
    
    Reference https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html-single/upgrading_from_rhel_7_to_rhel_8/index
    
-8. Explain rhel8 patching procedure using Ansible playbook?
+9. Explain rhel8 patching procedure using Ansible playbook?
    Ans:
    Yes, Using below reference can explain patching procedure using ansible playbook.
    
@@ -82,7 +83,8 @@ Troubleshooting Steps
 
 **2nd Round Scenarios:**
 
-1. User has reported intermittent network issue on application level, they are reaching you to analyse network traffic at this time. What step will you take place & what CLI used to conclude?
+1. User has reported intermittent network issue on application level, they are reaching you to analyse network traffic at this time. What step will you take 
+   place & what CLI used to conclude?
   Ans: 
   This answer will explain deep troubleshoot skills by answering, collect more inputs from Application stack holders like source & destination IP/Port which they are trying to hit.
   Next perform basic troubleshoot on traceroute of destination IP from source server IP to make sure connection establish and server is healthy.
