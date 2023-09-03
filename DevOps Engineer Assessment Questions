@@ -1,0 +1,69 @@
+DevOps Professional Engineer Assessment Questions 
+
+Duration: 2 Hours
+Access Requirement: Interviewer will share EC2 instance username/Key (.pem) before assessment starts.
+
+NOTE: Upon you onboarded in Assessment make sure READ the instructions carefully to Read the requirement, Time Management, Log File creation of each steps.
+
+Instruction:
+ --> You may needed to install all the required packages.
+ --> You don't need to follow the sequence of the tasks and manage your own time.
+ --> Take note on the command and step you use because interviewer may ask later.
+
+
+Task 1 : OS Config
+1.1 Set name server to 8.8.8.8
+    Ans: 
+1.2 Check version of kernel, OS and status of selinux
+1.3 Set the timezone to Singapore Time Zone
+1.4 Export all the package with date installation to /root/softwarelist.txt
+1.5 Exclude the java package from repo when install
+1.6 Install httpd and make sure it always start when restart machine
+1.7 Check when the dummy-user be created
+
+
+Task 2 - Sudoer and SSH
+2.1 Create a new user name: dummy-user and grant sudoer permission, prevent user to perform su command
+2.2 Create a group name: mysshgroup and add dummy-user account, ec2-user to that group
+2.3 Allow only that group to access SSH to system
+
+
+Task 3 - OS Disk and Partition
+3.1 Create a new mountpoint with 1GB from existing under /data (different volume group)
+3.2 Create a mount point /test (same volume group with /) and set noexec,nosuid
+
+Task 4 Integration
+4.1 Configure the machine to join to domain with below information
+- Target domain: TEST.LOCAL
+- AD IP address: 10.17.132.12 
+- AD Hostname: AD.TEST.LOCAL
+4.2 Configure rsyslog and send the log:
+- Log Collector: 10.17.132.22
+- Send only security log
+
+Task 5 Container
+5.1 Install and run docker as services.
+5.2 Create a docker images with below information:
+- Name: MyImages with updated data (you choose OS)
+- Install python3 with pip3
+- Use pip3 to install ansible
+- Launch the container with the built image
+5.3 Install kubeadm and kubectl
+5.4 Create a kubernetes cluster with kubeadm
+
+Task 6: SSL 
+6.1 Create a CSR with below info: 
+- Common Name: mymachine.test.local
+- RSA with 2048 key length
+- SAN: IP address of machine, common name and vm hostname
+6.2 Sign the cert with CSR created from previous tasks
+6.3 Replace the cert for the httpd install in tasks 1.6 (enable the httpd with 443)
+
+Task 7: CIS standard
+7.1 Ensure auditing for processes that start prior to auditd is enabled
+7.2 Ensure audit_backlog_limit is sufficient
+7.3 Disable USB Storage
+
+Task 8: Scripting
+8.1 Create bash script to check disk usage every 10 seconds and send the result to /root/usage.txt
+8.2 Create a crontab to trigger housekeeping at /var/log/secure every day
