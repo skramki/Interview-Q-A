@@ -33,6 +33,72 @@ https://www.knowledgehut.com/interview-questions/aws-architect-interview-questio
     3.6) Amazon FSx for Windows File Server: Native Windows specific software that needs to access the proprietary windows file system on the cloud
     3.7) AWS Storage Gateway: Storage Gateway is a simple way to let your on-premise applications store, access or archive the data into the AWS cloud. It provides a highly optimized, network resilient and low-cost way to move your data from on-prem to the cloud.
 
+4) How do you initiate Snapshot backup using Cloudshell?
+cat snapshot.sh
+#!/bin/bash
+## Description: Snapshot for Windows EC2 instances
+## How to run:	Connect Cloudshell service and run # sh snapshot.sh
+aws ec2 describe-instances --query 'Reservations[].Instances[].[InstanceId,Tags[?Key==`Name`].Value | [0],InstanceType,Platform,State.Name,PrivateIpAddress,Tags[?Key==`Name`].Value | [0]]' --output text | grep running | egrep -i windows | awk '{print $1,$2}' | egrep -vi none > INSTANCE_NAME.txt
+PATCH_DATE=`date +'%d%b%Y' `
+for INSTANCE_ID in `cat INSTANCE_NAME.txt | egrep -v "donot|clone|restore|discover|test" | awk '{print $1}'`; do echo $INSTANCE_ID; INSTANCE_NAME=`cat INSTANCE_NAME.txt | egrep -w $INSTANCE_ID | awk '{print $2}'`; aws ec2 create-snapshots --instance-specification InstanceId=$INSTANCE_ID --description "$INSTANCE_NAME-b4-$PATCH_DATE-Patching"; done
 
+5) You required to identify for Intrusion Detection across EC2 instances, How do you perform?
 
+## Main Scan Execution Completed##
+################################################ END OF Script Execution ###############################################################
+## Sample input file /root/url.lst ##
+#www.google.com
+#www.test.com
+#www.yahoo.com
+#www.awsservice.com
+cat curl-intrusion-detection.sh
+
+#!/bin/bash
+# Description:	IO Scan URL/IP validation across Linux instance for Intrusion Detection
+# How to run:	sudo sh curl-intrusion-detection.sh
+# Version:		1.0
+# Author:		Cloud Operations
+
+## Input Files ##
+DATE_TIME=`date +"%Y-%m-%d_%H-%M-%S"`
+CUSTOM_URL="/root/url.lst"
+ls -lrt /var/log | grep "^-" | awk '{print $9}' > /root/varlog-file.lst  ## Get current OS Log Files under /var/log path
+LOG_FILE=/tmp/IOSCAN-$DATE_TIME
+
+echo "Hostname : `hostname`" > $LOG_FILE
+echo "Host IP Address: `hostname -i`" >> $LOG_FILE
+
+echo "Timestamp: $DATE_TIME" >> $LOG_FILE
+echo "IO Scan IP/URL" >> $LOG_FILE
+cat /root/url.lst >> $LOG_FILE
+
+echo "IO Scan Files" >> $LOG_FILE
+cat /root/varlog-file.lst >> $LOG_FILE
+
+## Input Files ##
+
+## Main Scan Execution ##
+for CONN_TEST in `cat /root/url.lst`
+do
+CURL_CMND=`curl -sL -w "%{http_code}\\n" "$CONN_TEST" -o /dev/null`
+
+## Validate connection getting response Code 200 or Not ##
+if [[ CURL_CMND -eq 200 ]]
+then
+        echo "$CONN_TEST Connection code True: $CURL_CMND" >> $LOG_FILE		## Output of response Code is 200 ##
+        for LOG_FILE_SCAN in `cat /root/varlog-file.lst`
+        do
+                egrep -Rw $CONN_TEST /var/log/$LOG_FILE_SCAN >> $LOG_FILE 	## Scan Log Files
+        done
+else
+        echo "$CONN_TEST Connection code Error: $CURL_CMND" >> $LOG_FILE	## Output of response Code is not 200 ##
+fi
+done
+
+## Sample Output ##
+# www.google.com Connection code True: 200
+# www.test.com Connection code Error: 403
+# www.yahoo.com Connection code True: 200
+# www.awsservice.com Connection code Error: 503
+## Sample Output ##
 
