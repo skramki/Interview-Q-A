@@ -1,0 +1,51 @@
+Title: Cloud Business Analyst/Architecture
+
+Job Description:
+Skills
+•⁠  ⁠Cloud consumer focus and awareness
+•⁠  ⁠Business analysis i.e. requirements definition, prioritisation, evidencing and trace
+•⁠  ⁠Architecture analysis, design and recommendations
+•⁠  ⁠Process discovery, definition, and optimisation
+•⁠  ⁠Operational design
+•⁠  ⁠Change management / business readiness
+•⁠  ⁠Stakeholder identification and management
+
+Experience
+•⁠  ⁠Cloud - AWS and Azure architecture and design
+•⁠  ⁠Cloud Landing zones spokes and hubs, bends and associated processes
+•⁠  ⁠Networking, Containerisation, and/or service mesh
+•⁠  ⁠Consumer onboarding and adoption
+•⁠  ⁠Cloud Governance risk and controls frameworks
+
+Duration of Interview: 40 Mins
+Interviewer Day:
+
+Has started with expectation of this role, what from the candidate is looking from Cloud Business Analyst who need to build and collaborate with UK Business users, Architects, Business stack holders like Cloud Team, Technical and Non-Technical team management. As Business stack holder need strong expereince in Cloud exposure, Cloud process addiption, implementations, migrations, security, Backup, DR and work closely Change/Incident/Problem Management team to ensure Cloud practices are well alligned.
+
+Interviewer —>Self Introduction of your self where recent project implemented Business process.
+
+Candidate —> Start explains about current and previous role related to Project implementation followed by ITIL process.
+
+Interviewer-1 Questions:
+
+1. Tell about what are the Cloud platforms you are familier?
+2. Can you give Cloud deployment model you have used?
+3. How do you see the role of a Business Analyst in a cloud environment?
+4. Imagine a Business scenario where you need to define the requirements in a new self-service portal (tools). How would you approach and write documenting a story?
+5. Have you worked on Low-latency environment? Yes means, Explain cloud services you would recommend for Business users in terms of Perfomance tuning, Cost optimization, on-board steps?
+6. Do you have expereince in Azure/IBM Cloud services?
+7. What’s your level of expereince in IaC automation like Terraform?
+8. Explain detail terraform directory structure you worked on and what’s your expert level in terraform?
+9. How you will save terraform state file?
+10. What is Terraform init, plan and apply, Can you explain in detail?
+
+Interviewer-2 Questions:
+1. How you manage Day-Day operation tasks and what are the tools, services you are familiar with for smoother operations?
+2. What are the Cloud security finding and vulnerablity tools you are familier with? Also explain how you consider vulnerablity and approach to run operations?
+3. Considering as Business Analyst out of Technical, what log monitoring analysis and some key operational approach you would consider to monitor effective Cloud practices?
+4. Apart from native cloud monitoring, What’s your experience in open-source monitoring and vulnerablity tools?  Also explain why you suggest those open-source tools?
+5. What’s your approach while presenting Incident and Change management report with Business users and Upper management?
+6. How do you address Sev1 Incidents, Let’s say recurring 2 months reports Sev1 Incident flags 10+? What’s your action plan summary to leverage down number of Incidents?
+7. You worked on Problem Management right? Yes, What’s your story writting statements on Problem to publish and can you give an example ?
+8. What are the effective actions you take place to avoid similar problem to justify Business users? Also with problem statement RCA has provided, explain how your story creation will ensure User satisfaction using in Agile/Scrumb methodology.
+9. A stakeholder is concerned about the costing of project and User is negotiate cost after customer report analysis. How would you address their concerns?
