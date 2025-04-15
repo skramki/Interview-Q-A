@@ -1,0 +1,62 @@
+Title: Lead DevOps Engineer
+📌 Role: Kubernetes Engineer
+
+Job Description:
+Key Responsibilities:
+
+Deploy and manage applications on Microsoft Azure using Terraform.
+Work with Kubernetes, including creating and managing clusters, deploying and scaling applications, and troubleshooting issues.
+Develop .NET applications with proficiency in C# and experience using .NET frameworks and tools.
+Integrate applications with Azure services such as Azure Active Directory and Azure SQL.
+Implement and maintain DevOps practices, including continuous integration and delivery (CI/CD), automation, and testing.
+Utilize GitOps principles and tools like ArgoCD for application deployment and management.
+Ensure security, scalability, and performance of deployed applications.
+
+Required Skills:
+
+Strong experience with Microsoft Azure and infrastructure as code (IaC) using Terraform.
+Proficiency in Kubernetes, including Helm charts and cluster management.
+Hands-on experience with .NET development, including C# and related frameworks.
+Knowledge of Azure services, such as Azure AD, Azure SQL, and other cloud-native tools.
+Familiarity with DevOps tools and methodologies, including CI/CD pipelines.
+Experience with GitHub and GitHub Actions.
+Experience with Argo Workflow or Ansible.
+
+Preferred Skills:
+
+Experience with ArgoCD and GitOps workflows.
+Strong scripting skills in PowerShell, Bash, or Python.
+Experience with monitoring and logging tools like DataDog.
+Understanding of security best practices for cloud-native applications.
+✅ Certification - AWS Certified Solution Architect
+✅ Certification - Certified Kubernetes Administrator or Developer
+
+################################################################################################################################################################################################
+
+Duration of interview : 1 hour
+
+Interviewer  Questions:
+
+1. What is a Pod in Kubernetes? Create a pod.yaml for a single-container pod running Nginx.
+2. What is a Deployment in Kubernetes? Write a deployment.yaml for deploying 3 replicas of an Nginx container.
+3. What is a Service in Kubernetes, and what are the types of Services?
+4. When would you use each type of Kubernetes Service (ClusterIP, NodePort, LoadBalancer, ExternalName)?
+5. Write a simple Terraform script to provision a virtual machine on AWS.
+6. Explain port, targetPort, and nodePort in a Kubernetes service.
+7. How would you expose a Kubernetes application externally?
+8. What is Helm, and what are its components (Chart, Repository, Release)?
+9. What is the difference between EXPOSE in a Dockerfile and docker run -p?
+10. How do you run Nginx on a Linux server using Docker?
+11. Explain HTTP, HTTPS, TCP, and UDP with examples.
+12. What is a Dockerfile? Write a basic Dockerfile for a Node.js application.
+13. What is a base image in Docker? Which base image would you use for Python or Node.js?
+14. How do you check for open ports on a Linux system?
+15. What are the benefits of using a firewall?
+16. What is the use of Ingress and Ingress Controller in Kubernetes?
+17. Explain the Kubernetes controllers: Deployment, StatefulSet, ReplicaSet, and DaemonSet.
+18. What is the difference between Deployment and ReplicaSet?
+19. What are Kubernetes Probes (Liveness, Readiness, Startup)?
+20. What is the difference between Stateful and Stateless applications? Give examples.
+21. What are Namespaces in Kubernetes?
+22. What is Port Forwarding in Kubernetes?
+23. Do you have any certifications?
