@@ -1,0 +1,31 @@
+Role: SRE Kubernetes Engineer
+
+Job Description:
+
+· Expert-level experience in Kubernetes administration, including building Kubernetes clusters from scratch on both on-premises and cloud environments.
+
+· In-depth understanding of all Kubernetes components with strong troubleshooting skills.
+
+· Solid knowledge of distributed systems, networking, and Linux.
+
+· Hands-on experience with containerization technologies such as Docker.
+
+· Proficiency in CI/CD pipelines and automation tools like Ansible.
+
+· Strong problem-solving abilities and the capability to work independently, taking ownership of projects from start to finish.
+
+· Excellent communication skills, with the ability to effectively collaborate across teams.
+
+Interviewer:
+1. Tell about your experience focused on Kubernetes environment you have worked on?
+2. How do you setup Kubernetes cluster in On-premises environment? Think about HA, multiple AZ, Network connection, starts with Pre-request?
+3. Explain Kubernetes Architecture workflow and describe individual components?
+4. Tell you CI/CD pipeline experience on Kubernetes and what tools you have worked pipeline process? Consider OpenStack On-premises setup?
+5. Explain about Docker compose?
+6. Explain your design on Dockerfile structure to build pods? Consider you have Java or .Net application required to deploy.
+7. Explain your experience on Helm chart and the deployment process?
+8. Explain Jenkins or GitHub auctions authentication methodology to integration with CI/CD workflow?
+9. How will you start Pod on a specific node in terms of CPU and GPU structure? ( I explained in CPU architecture - NodeSelector and NodeName ) - But expected NodeAffinity which used in GPU architecture 
+10. Rate yourself with Terraform?
+11. Why Terraform Licensing need to be considered? Explain your open source and BSL license difference?
+
